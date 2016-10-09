@@ -247,21 +247,29 @@ class Color implements ColorContract
     /**
      * Check if the color is bright.
      *
+     * @param  float|int  $contrast
+     *
      * @return bool
      */
-    public function isBright()
+    public function isBright($contrast = 150)
     {
-        return ($this->red + $this->green + $this->blue) > 382;
+        return $contrast < sqrt(
+            (pow($this->red, 2)   * .299) +
+            (pow($this->green, 2) * .587) +
+            (pow($this->blue, 2)  * .114)
+        );
     }
 
     /**
      * Check if the color is dark.
      *
+     * @param  float|int  $contrast
+     *
      * @return bool
      */
-    public function isDark()
+    public function isDark($contrast = 150)
     {
-        return ! $this->isBright();
+        return ! $this->isBright($contrast);
     }
 
     /**

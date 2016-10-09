@@ -128,16 +128,20 @@ interface Color
     /**
      * Check if the color is bright.
      *
+     * @param  float|int  $contrast
+     *
      * @return bool
      */
-    public function isBright();
+    public function isBright($contrast = 150);
 
     /**
      * Check if the color is dark.
      *
+     * @param  float|int  $contrast
+     *
      * @return bool
      */
-    public function isDark();
+    public function isDark($contrast = 150);
 
     /**
      * Check if the color is valid.
