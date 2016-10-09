@@ -1,12 +1,14 @@
-<?php namespace Arcanedev\Color\Helpers;
+<?php namespace Arcanedev\Color;
+
+use Arcanedev\Color\Contracts\ColorConverter as ColorConverterContract;
 
 /**
  * Class     ColorConverter
  *
- * @package  Arcanedev\Color\Helpers
+ * @package  Arcanedev\Color
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ColorConverter
+class ColorConverter implements ColorConverterContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Traits

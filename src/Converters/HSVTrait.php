@@ -1,9 +1,9 @@
-<?php namespace Arcanedev\Color\Helpers\Converters;
+<?php namespace Arcanedev\Color\Converters;
 
 /**
- * Class     HSVTrait
+ * Trait     HSVTrait
  *
- * @package  Arcanedev\Color\Helpers\Converters
+ * @package  Arcanedev\Color\Converters
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 trait HSVTrait

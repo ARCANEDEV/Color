@@ -1,12 +1,11 @@
-<?php namespace Arcanedev\Color\Tests\Helpers;
+<?php namespace Arcanedev\Color\Tests;
 
-use Arcanedev\Color\Helpers\ColorConverter;
-use Arcanedev\Color\Tests\TestCase;
+use Arcanedev\Color\ColorConverter;
 
 /**
  * Class     ColorConverterTest
  *
- * @package  Arcanedev\Color\Tests\Helpers
+ * @package  Arcanedev\Color\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
 class ColorConverterTest extends TestCase

@@ -2,8 +2,8 @@
 
 use Arcanedev\Color\Contracts\Color as ColorContract;
 use Arcanedev\Color\Exceptions\ColorException;
-use Arcanedev\Color\Helpers\ColorValidator;
-use Arcanedev\Color\Helpers\ColorConverter;
+use Arcanedev\Color\ColorValidator;
+use Arcanedev\Color\ColorConverter;
 
 /**
  * Class     Color
@@ -278,6 +278,10 @@ class Color implements ColorContract
         return ColorValidator::isValidHex($hex);
     }
 
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
     /**
      * Check the color.
      *
