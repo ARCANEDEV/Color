@@ -2,6 +2,8 @@
 
 use Arcanedev\Color\Contracts\Color as ColorContract;
 use Arcanedev\Color\Exceptions\ColorException;
+use Arcanedev\Color\Helpers\ColorValidator;
+use Arcanedev\Color\Helpers\ColorConverter;
 
 /**
  * Class     Color
@@ -154,15 +156,15 @@ class Color implements ColorContract
     /**
      * Make a Color instance.
      *
-     * @param  string  $value
+     * @param  string  $color
      *
      * @return self
      */
-    public static function make($value)
+    public static function make($color)
     {
-        self::checkHex($value);
+        self::checkHex($color);
 
-        list($red, $green, $blue) = self::extractRGB($value);
+        list($red, $green, $blue) = ColorConverter::hexToRgb($color);
 
         return new self($red, $green, $blue);
     }
@@ -176,11 +178,9 @@ class Color implements ColorContract
      */
     public function toHex($uppercase = true)
     {
-        $hex = implode('', array_map(function ($value) {
-            return str_pad(dechex($value), 2, '0', STR_PAD_LEFT);
-        }, [$this->red, $this->green, $this->blue]));
+        $hex = ColorConverter::rgbToHex($this->red, $this->green, $this->blue);
 
-        return '#' . ($uppercase ? strtoupper($hex) : strtolower($hex));
+        return $uppercase ? strtoupper($hex) : strtolower($hex);
     }
 
     /**
@@ -224,9 +224,9 @@ class Color implements ColorContract
      *
      * @return bool
      */
-    public static function isValid($hex)
+    public static function isValidHex($hex)
     {
-        return preg_match_all('/^#(?:[0-9a-fA-F]{3}){1,2}$/', $hex) !== 0;
+        return ColorValidator::isValidHex($hex);
     }
 
     /**
@@ -238,7 +238,7 @@ class Color implements ColorContract
      */
     private static function checkHex($value)
     {
-        if ( ! self::isValid($value))
+        if ( ! self::isValidHex($value))
             throw new ColorException("Invalid HEX Color [$value].");
     }
 
@@ -258,31 +258,5 @@ class Color implements ColorContract
             throw new ColorException(
                 "The color value must be between 0 and 255, [$value] is given."
             );
-    }
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Extract RGB value.
-     *
-     * @param  string  $value
-     *
-     * @return array
-     */
-    protected static function extractRGB($value)
-    {
-        $value = str_replace('#', '', $value);
-
-        return array_map('hexdec', strlen($value) === 6 ? [
-            substr($value, 0, 2),
-            substr($value, 2, 2),
-            substr($value, 4, 2),
-        ] : [
-            str_repeat(substr($value, 0, 1), 2),
-            str_repeat(substr($value, 1, 1), 2),
-            str_repeat(substr($value, 2, 1), 2),
-        ]);
     }
 }
