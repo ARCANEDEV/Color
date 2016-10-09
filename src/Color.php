@@ -59,7 +59,7 @@ class Color implements ColorContract
      */
     public function __construct($red = 0, $green = 0, $blue = 0, $alpha = 1)
     {
-        $this->setRGB($red, $green, $blue)->setAlpha($alpha);
+        $this->setRGBA($red, $green, $blue, $alpha);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -80,6 +80,22 @@ class Color implements ColorContract
         return $this->setRed($red)
                     ->setGreen($green)
                     ->setBlue($blue);
+    }
+
+    /**
+     * Set the RGBA values.
+     *
+     * @param  int        $red
+     * @param  int        $green
+     * @param  int        $blue
+     * @param  float|int  $alpha
+     *
+     * @return self
+     */
+    public function setRGBA($red, $green, $blue, $alpha)
+    {
+        return $this->setRGB($red, $green, $blue)
+                    ->setAlpha($alpha);
     }
 
     /**

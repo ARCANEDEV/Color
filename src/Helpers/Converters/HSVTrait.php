@@ -23,17 +23,16 @@ trait HSVTrait
      */
     public static function rgbToHsv($red, $green, $blue)
     {
-        $red   = ($red / 255);
-        $green = ($green / 255);
-        $blue  = ($blue / 255);
-
+        $red        = $red   / 255;
+        $green      = $green / 255;
+        $blue       = $blue  / 255;
         $maxRGB     = max($red, $green, $blue);
         $minRGB     = min($red, $green, $blue);
-        $chroma     = $maxRGB - $minRGB;
 
         $hue        = 0;
         $saturation = 0;
         $value      = 100 * $maxRGB;
+        $chroma     = $maxRGB - $minRGB;
 
         if ($chroma != 0) {
             $saturation = 100 * ($chroma / $maxRGB);
@@ -92,15 +91,14 @@ trait HSVTrait
         $xPrime = self::calculateXPrime($hPrime, $chroma);
 
         switch (floor($hPrime)) {
-            case 0: return [$chroma, $xPrime, 0.0];
-            case 1: return [$xPrime, $chroma, 0.0];
-            case 2: return [0.0, $chroma, $xPrime];
-            case 3: return [0.0, $xPrime, $chroma];
-            case 4: return [$xPrime, 0.0, $chroma];
-            case 5: return [$chroma, 0.0, $xPrime];
+            case 0:  return [$chroma, $xPrime, 0.0];
+            case 1:  return [$xPrime, $chroma, 0.0];
+            case 2:  return [0.0, $chroma, $xPrime];
+            case 3:  return [0.0, $xPrime, $chroma];
+            case 4:  return [$xPrime, 0.0, $chroma];
+            case 5:  return [$chroma, 0.0, $xPrime];
+            default: return [0.0, 0.0, 0.0];
         }
-
-        return [0.0, 0.0, 0.0];
     }
 
     /**
