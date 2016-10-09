@@ -31,6 +31,7 @@ class ColorTest extends TestCase
         $this->assertSame(0, $color->red());
         $this->assertSame(0, $color->green());
         $this->assertSame(0, $color->blue());
+        $this->assertSame(1, $color->alpha());
         $this->assertTrue($color->isDark());
         $this->assertFalse($color->isBright());
     }
@@ -43,6 +44,7 @@ class ColorTest extends TestCase
         $this->assertSame(255, $color->red());
         $this->assertSame(255, $color->green());
         $this->assertSame(255, $color->blue());
+        $this->assertSame(1,   $color->alpha());
         $this->assertFalse($color->isDark());
         $this->assertTrue($color->isBright());
     }
@@ -56,6 +58,7 @@ class ColorTest extends TestCase
             $this->assertSame(0, $color->red());
             $this->assertSame(0, $color->green());
             $this->assertSame(0, $color->blue());
+            $this->assertSame(1, $color->alpha());
             $this->assertTrue($color->isDark());
             $this->assertFalse($color->isBright());
         }
@@ -66,6 +69,7 @@ class ColorTest extends TestCase
             $this->assertSame(255, $color->red());
             $this->assertSame(255, $color->green());
             $this->assertSame(255, $color->blue());
+            $this->assertSame(1,   $color->alpha());
             $this->assertFalse($color->isDark());
             $this->assertTrue($color->isBright());
         }
@@ -85,6 +89,12 @@ class ColorTest extends TestCase
         $this->assertSame('#FFFFFF', $color->toHex());
         $this->assertSame('#ffffff', $color->toHex(false));
         $this->assertSame('#FFFFFF', (string) $color);
+
+        $color = new Color(186, 218, 85);
+
+        $this->assertSame('#BADA55', $color->toHex());
+        $this->assertSame('#bada55', $color->toHex(false));
+        $this->assertSame('#BADA55', (string) $color);
     }
 
     /**
@@ -102,7 +112,7 @@ class ColorTest extends TestCase
      * @test
      *
      * @expectedException         \Arcanedev\Color\Exceptions\ColorException
-     * @expectedExceptionMessage  The color value must be an integer.
+     * @expectedExceptionMessage  The red value must be an integer.
      */
     public function it_must_throw_an_exception_on_invalid_rgb_color_one()
     {
@@ -113,10 +123,32 @@ class ColorTest extends TestCase
      * @test
      *
      * @expectedException         \Arcanedev\Color\Exceptions\ColorException
-     * @expectedExceptionMessage  The color value must be between 0 and 255, [9000] is given.
+     * @expectedExceptionMessage  The red value must be between 0 and 255, [9000] is given.
      */
     public function it_must_throw_an_exception_on_invalid_rgb_color_two()
     {
         new Color(9000);
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException         \Arcanedev\Color\Exceptions\ColorException
+     * @expectedExceptionMessage  The alpha value must be a float or an integer.
+     */
+    public function it_must_throw_an_exception_on_invalid_alpha_one()
+    {
+        (new Color())->setAlpha('1');
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException         \Arcanedev\Color\Exceptions\ColorException
+     * @expectedExceptionMessage  The alpha value must be between 0 and 1, [100] is given.
+     */
+    public function it_must_throw_an_exception_on_invalid_alpha_two()
+    {
+        (new Color())->setAlpha(100);
     }
 }
