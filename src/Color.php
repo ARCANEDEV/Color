@@ -38,6 +38,13 @@ class Color implements ColorContract
      */
     protected $blue = 0;
 
+    /**
+     * Alpha value.
+     *
+     * @var float|int
+     */
+    protected $alpha = 1;
+
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
      | ------------------------------------------------------------------------------------------------
@@ -45,13 +52,14 @@ class Color implements ColorContract
     /**
      * Color constructor.
      *
-     * @param  int  $red
-     * @param  int  $green
-     * @param  int  $blue
+     * @param  int        $red
+     * @param  int        $green
+     * @param  int        $blue
+     * @param  float|int  $alpha
      */
-    public function __construct($red = 0, $green = 0, $blue = 0)
+    public function __construct($red = 0, $green = 0, $blue = 0, $alpha = 1)
     {
-        $this->setRGB($red, $green, $blue);
+        $this->setRGB($red, $green, $blue)->setAlpha($alpha);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -93,7 +101,7 @@ class Color implements ColorContract
      */
     public function setRed($red)
     {
-        $this->checkValue($red);
+        $this->checkColorValue('red', $red);
         $this->red = $red;
 
         return $this;
@@ -118,7 +126,7 @@ class Color implements ColorContract
      */
     public function setGreen($green)
     {
-        $this->checkValue($green);
+        $this->checkColorValue('green', $green);
         $this->green = $green;
 
         return $this;
@@ -143,8 +151,33 @@ class Color implements ColorContract
      */
     public function setBlue($blue)
     {
-        $this->checkValue($blue);
+        $this->checkColorValue('blue', $blue);
         $this->blue = $blue;
+
+        return $this;
+    }
+
+    /**
+     * Get the alpha value.
+     *
+     * @return float|int
+     */
+    public function alpha()
+    {
+        return $this->alpha;
+    }
+
+    /**
+     * Set the alpha value.
+     *
+     * @param  float|int  $alpha
+     *
+     * @return self
+     */
+    public function setAlpha($alpha)
+    {
+        $this->checkAlphaValue($alpha);
+        $this->alpha = $alpha;
 
         return $this;
     }
@@ -245,18 +278,37 @@ class Color implements ColorContract
     /**
      * Set color value.
      *
-     * @param  int  $value
+     * @param  string  $name
+     * @param  int     $value
      *
      * @throws \Arcanedev\Color\Exceptions\ColorException
      */
-    private function checkValue($value)
+    private function checkColorValue($name, $value)
     {
         if ( ! is_int($value))
-            throw new ColorException('The color value must be an integer.');
+            throw new ColorException("The $name value must be an integer.");
 
         if ($value < 0 || $value > 255)
             throw new ColorException(
-                "The color value must be between 0 and 255, [$value] is given."
+                "The $name value must be between 0 and 255, [$value] is given."
+            );
+    }
+
+    /**
+     * Check the alpha value.
+     *
+     * @param  float|int  $alpha
+     *
+     * @throws \Arcanedev\Color\Exceptions\ColorException
+     */
+    public function checkAlphaValue($alpha)
+    {
+        if ( ! is_float($alpha) && ! is_int($alpha))
+            throw new ColorException("The alpha value must be a float or an integer.");
+
+        if ($alpha < 0 || $alpha > 1)
+            throw new ColorException(
+                "The alpha value must be between 0 and 1, [$alpha] is given."
             );
     }
 }
