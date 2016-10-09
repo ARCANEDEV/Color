@@ -2,8 +2,6 @@
 
 use Arcanedev\Color\Contracts\Color as ColorContract;
 use Arcanedev\Color\Exceptions\ColorException;
-use Arcanedev\Color\ColorValidator;
-use Arcanedev\Color\ColorConverter;
 
 /**
  * Class     Color

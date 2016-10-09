@@ -13,7 +13,9 @@ trait HSVTrait
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Convert an RGB color to an HSV array.
+     * Convert an RGB color to an HSV array (alias).
+     *
+     * @see    fromRgbToHsv
      *
      * @param  int  $red
      * @param  int  $green
@@ -22,6 +24,20 @@ trait HSVTrait
      * @return array
      */
     public static function rgbToHsv($red, $green, $blue)
+    {
+        return (new self())->fromRgbToHsv($red, $green, $blue);
+    }
+
+    /**
+     * Convert an RGB color to an HSV array.
+     *
+     * @param  int  $red
+     * @param  int  $green
+     * @param  int  $blue
+     *
+     * @return array
+     */
+    public function fromRgbToHsv($red, $green, $blue)
     {
         $red        = $red   / 255;
         $green      = $green / 255;
@@ -55,7 +71,9 @@ trait HSVTrait
     }
 
     /**
-     * Convert an HSV color to an RGB array.
+     * Convert an HSV color to an RGB array (alias).
+     *
+     * @see    fromHsvToRgb
      *
      * @param  float|int  $hue
      * @param  float|int  $saturation
@@ -65,12 +83,28 @@ trait HSVTrait
      */
     public static function hsvToRgb($hue, $saturation, $value)
     {
-        $lightness = self::sanitizeHsvValue($value, 0, 100) / 100.0;                     // Lightness:  0.0-1.0
-        $chroma    = $lightness * (self::sanitizeHsvValue($saturation, 0, 100) / 100.0); // Chroma:     0.0-1.0
+        return (new self)->fromHsvToRgb($hue, $saturation, $value);
+    }
+
+    /**
+     * Convert an HSV color to an RGB array.
+     *
+     * @param  float|int  $hue
+     * @param  float|int  $saturation
+     * @param  float|int  $value
+     *
+     * @return array
+     */
+    public function fromHsvToRgb($hue, $saturation, $value)
+    {
+        // Lightness: 0.0 - 1.0
+        $lightness = $this->sanitizeHsvValue($value, 0, 100) / 100.0;
+        // Chroma:    0.0 - 1.0
+        $chroma    = $lightness * ($this->sanitizeHsvValue($saturation, 0, 100) / 100.0);
 
         return array_map(function ($color) use ($lightness, $chroma) {
             return (int) round(($color + ($lightness - $chroma)) * 255);
-        }, self::calculateRgbWithHueAndChroma($hue, $chroma));
+        }, $this->calculateRgbWithHueAndChroma($hue, $chroma));
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -85,10 +119,10 @@ trait HSVTrait
      *
      * @return array
      */
-    protected static function calculateRgbWithHueAndChroma($hue, $chroma)
+    protected function calculateRgbWithHueAndChroma($hue, $chroma)
     {
-        $hPrime = self::sanitizeHsvValue($hue, 0, 360) / 60.0;
-        $xPrime = self::calculateXPrime($hPrime, $chroma);
+        $hPrime = $this->sanitizeHsvValue($hue, 0, 360) / 60.0;
+        $xPrime = $this->calculateXPrime($hPrime, $chroma);
 
         switch (floor($hPrime)) {
             case 0:  return [$chroma, $xPrime, 0.0];
@@ -109,7 +143,7 @@ trait HSVTrait
      *
      * @return float|int
      */
-    protected static function calculateXPrime($hPrime, $chroma)
+    protected function calculateXPrime($hPrime, $chroma)
     {
         while ($hPrime >= 2.0) $hPrime -= 2.0;
 
@@ -125,7 +159,7 @@ trait HSVTrait
      *
      * @return float|int
      */
-    protected static function sanitizeHsvValue($value, $min, $max)
+    protected function sanitizeHsvValue($value, $min, $max)
     {
         if ($value < $min) return $min;
         if ($value > $max) return $max;

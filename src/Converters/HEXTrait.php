@@ -13,13 +13,27 @@ trait HEXTrait
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Convert a HEX color to an RGB array.
+     * Convert a HEX color to an RGB array (alias).
+     *
+     * @see    fromHexToRgb
      *
      * @param  string  $hex
      *
      * @return array
      */
     public static function hexToRgb($hex)
+    {
+        return (new self)->fromHexToRgb($hex);
+    }
+
+    /**
+     * Convert a HEX color to an RGB array.
+     *
+     * @param  string  $hex
+     *
+     * @return array
+     */
+    public function fromHexToRgb($hex)
     {
         $value = str_replace('#', '', $hex);
 
@@ -35,7 +49,9 @@ trait HEXTrait
     }
 
     /**
-     * Convert RGB values to a HEX color.
+     * Convert RGB values to a HEX color (alias).
+     *
+     * @see    fromRgbToHex
      *
      * @param  int  $red
      * @param  int  $green
@@ -44,6 +60,20 @@ trait HEXTrait
      * @return string
      */
     public static function rgbToHex($red, $green, $blue)
+    {
+        return (new self)->fromRgbToHex($red, $green, $blue);
+    }
+
+    /**
+     * Convert RGB values to a HEX color.
+     *
+     * @param  int  $red
+     * @param  int  $green
+     * @param  int  $blue
+     *
+     * @return string
+     */
+    public function fromRgbToHex($red, $green, $blue)
     {
         return '#' . implode('', array_map(function ($value) {
             return str_pad(dechex($value), 2, '0', STR_PAD_LEFT);

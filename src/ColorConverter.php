@@ -22,7 +22,9 @@ class ColorConverter implements ColorConverterContract
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Convert a HEX color to an HSV array.
+     * Convert a HEX color to an HSV array (alias).
+     *
+     * @see    fromHexToHsv
      *
      * @param  string  $hex
      *
@@ -30,9 +32,37 @@ class ColorConverter implements ColorConverterContract
      */
     public static function hexToHsv($hex)
     {
-        list($red, $green, $blue) = self::hexToRgb($hex);
+        return (new self)->fromHexToHsv($hex);
+    }
 
-        return self::rgbToHsv($red, $green, $blue);
+    /**
+     * Convert a HEX color to an HSV array.
+     *
+     * @param  string  $hex
+     *
+     * @return array
+     */
+    public function fromHexToHsv($hex)
+    {
+        list($red, $green, $blue) = $this->fromHexToRgb($hex);
+
+        return $this->fromRgbToHsv($red, $green, $blue);
+    }
+
+    /**
+     * Convert an HSV to HEX color (alias).
+     *
+     * @see    fromHsvToHex
+     *
+     * @param  float|int  $hue
+     * @param  float|int  $saturation
+     * @param  float|int  $value
+     *
+     * @return array
+     */
+    public static function hsvToHex($hue, $saturation, $value)
+    {
+        return (new self)->fromHsvToHex($hue, $saturation, $value);
     }
 
     /**
@@ -44,10 +74,10 @@ class ColorConverter implements ColorConverterContract
      *
      * @return array
      */
-    public static function hsvToHex($hue, $saturation, $value)
+    public function fromHsvToHex($hue, $saturation, $value)
     {
-        list($red, $green, $blue) = self::hsvToRgb($hue, $saturation, $value);
+        list($red, $green, $blue) = $this->fromHsvToRgb($hue, $saturation, $value);
 
-        return self::rgbToHex($red, $green, $blue);
+        return $this->fromRgbToHex($red, $green, $blue);
     }
 }
