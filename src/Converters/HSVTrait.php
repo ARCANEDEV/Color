@@ -123,16 +123,10 @@ trait HSVTrait
     {
         $hPrime = $this->sanitizeHsvValue($hue, 0, 360) / 60.0;
         $xPrime = $this->calculateXPrime($hPrime, $chroma);
+        $colors = $this->getColorsRange($chroma, $xPrime);
+        $index  = (int) floor($hPrime);
 
-        switch (floor($hPrime)) {
-            case 0:  return [$chroma, $xPrime, 0.0];
-            case 1:  return [$xPrime, $chroma, 0.0];
-            case 2:  return [0.0, $chroma, $xPrime];
-            case 3:  return [0.0, $xPrime, $chroma];
-            case 4:  return [$xPrime, 0.0, $chroma];
-            case 5:  return [$chroma, 0.0, $xPrime];
-            default: return [0.0, 0.0, 0.0];
-        }
+        return array_key_exists($index, $colors) ? $colors[$index] : [0.0, 0.0, 0.0];
     }
 
     /**
@@ -165,5 +159,25 @@ trait HSVTrait
         if ($value > $max) return $max;
 
         return $value;
+    }
+
+    /**
+     * Get the colors range.
+     *
+     * @param  float|int  $chroma
+     * @param  float|int  $xPrime
+     *
+     * @return array
+     */
+    protected function getColorsRange($chroma, $xPrime)
+    {
+        return [
+            0 => [$chroma, $xPrime, 0.0],
+            1 => [$xPrime, $chroma, 0.0],
+            2 => [0.0, $chroma, $xPrime],
+            3 => [0.0, $xPrime, $chroma],
+            4 => [$xPrime, 0.0, $chroma],
+            5 => [$chroma, 0.0, $xPrime],
+        ];
     }
 }

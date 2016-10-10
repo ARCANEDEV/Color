@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\Color\Tests;
+
 use Arcanedev\Color\ColorServiceProvider;
 
 /**
@@ -10,52 +11,27 @@ use Arcanedev\Color\ColorServiceProvider;
 class ColorServiceProviderTest extends LaravelTestCase
 {
     /* ------------------------------------------------------------------------------------------------
-     |  Properties
-     | ------------------------------------------------------------------------------------------------
-     */
-    /** @var  \Arcanedev\Color\ColorServiceProvider */
-    protected $provider;
-
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->app->loadDeferredProviders();
-
-        $this->provider = $this->app->getProvider(ColorServiceProvider::class);
-    }
-
-    public function tearDown()
-    {
-        unset($this->provider);
-
-        parent::tearDown();
-    }
-
-    /* ------------------------------------------------------------------------------------------------
      |  Test Functions
      | ------------------------------------------------------------------------------------------------
      */
     /** @test */
     public function it_can_be_instantiated()
     {
+        $provider     = $this->app->getProvider(ColorServiceProvider::class);
         $expectations = [
             \Illuminate\Support\ServiceProvider::class,
             ColorServiceProvider::class,
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->provider);
+            $this->assertInstanceOf($expected, $provider);
         }
     }
 
     /** @test */
     public function it_can_provides()
     {
+        $provider = $this->app->getProvider(ColorServiceProvider::class);
         $expected = [
             'arcanedev.color',
             'arcanedev.color.converter',
@@ -63,7 +39,7 @@ class ColorServiceProviderTest extends LaravelTestCase
             \Arcanedev\Color\Contracts\ColorConverter::class,
         ];
 
-        $this->assertSame($expected, $this->provider->provides());
+        $this->assertSame($expected, $provider->provides());
     }
 
     /** @test */

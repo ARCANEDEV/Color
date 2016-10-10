@@ -42,7 +42,7 @@ class ColorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->extendValidator();
     }
 
     /**
@@ -58,5 +58,21 @@ class ColorServiceProvider extends ServiceProvider
             Contracts\Color::class,
             Contracts\ColorConverter::class,
         ];
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Extend validator.
+     */
+    private function extendValidator()
+    {
+        /** @var \Illuminate\Validation\Factory $validator */
+        $validator = $this->app->make('validator');
+
+        $validator->extend('color',   'Arcanedev\\Color\\Laravel\\ColorValidator@validate');
+        $validator->replacer('color', 'Arcanedev\\Color\\Laravel\\ColorValidator@message');
     }
 }
