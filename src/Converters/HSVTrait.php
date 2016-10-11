@@ -52,22 +52,12 @@ trait HSVTrait
 
         if ($chroma != 0) {
             $saturation = 100 * ($chroma / $maxRGB);
-
-            if ($red == $minRGB)
-                $hue = 3 - (($green - $blue) / $chroma);
-            elseif ($blue == $minRGB)
-                $hue = 1 - (($red - $green) / $chroma);
-            else // $green == $minRGB
-                $hue = 5 - (($blue - $red) / $chroma);
-
-            $hue = 60 * $hue;
+            $hue        = $this->recalculateHue($red, $green, $blue, $minRGB, $chroma) * 60;
         }
 
-        return [
-            round($hue, 2),
-            round($saturation, 2),
-            round($value, 2),
-        ];
+        return array_map(function ($value) {
+            return round($value, 2);
+        }, [$hue, $saturation, $value]);
     }
 
     /**
@@ -111,6 +101,32 @@ trait HSVTrait
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Recalculate the Hue.
+     *
+     * @param  float|int  $red
+     * @param  float|int  $green
+     * @param  float|int  $blue
+     * @param  float|int  $minRGB
+     * @param  float|int  $chroma
+     *
+     * @return float|int
+     */
+    protected function recalculateHue($red, $green, $blue, $minRGB, $chroma)
+    {
+        switch ($minRGB) {
+            case $red:
+                return 3 - (($green - $blue) / $chroma);
+
+            case $blue:
+                return 1 - (($red - $green) / $chroma);
+
+            case $green:
+            default:
+                return 5 - (($blue - $red) / $chroma);
+        }
+    }
+
     /**
      * Calculate RGB with hue and chroma.
      *
