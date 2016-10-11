@@ -49,6 +49,6 @@ abstract class LaravelTestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        //
+        $app->loadDeferredProviders();
     }
 }

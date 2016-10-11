@@ -21,7 +21,7 @@ interface Color
      *
      * @return self
      */
-    public function setRGB($red, $green, $blue);
+    public function setRgb($red, $green, $blue);
 
     /**
      * Set the RGBA values.
@@ -33,7 +33,7 @@ interface Color
      *
      * @return self
      */
-    public function setRGBA($red, $green, $blue, $alpha);
+    public function setRgba($red, $green, $blue, $alpha);
 
     /**
      * Get red value.

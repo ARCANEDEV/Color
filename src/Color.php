@@ -57,7 +57,7 @@ class Color implements ColorContract
      */
     public function __construct($red = 0, $green = 0, $blue = 0, $alpha = 1)
     {
-        $this->setRGBA($red, $green, $blue, $alpha);
+        $this->setRgba($red, $green, $blue, $alpha);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ class Color implements ColorContract
      *
      * @return self
      */
-    public function setRGB($red, $green, $blue)
+    public function setRgb($red, $green, $blue)
     {
         return $this->setRed($red)
                     ->setGreen($green)
@@ -90,9 +90,9 @@ class Color implements ColorContract
      *
      * @return self
      */
-    public function setRGBA($red, $green, $blue, $alpha)
+    public function setRgba($red, $green, $blue, $alpha)
     {
-        return $this->setRGB($red, $green, $blue)
+        return $this->setRgb($red, $green, $blue)
                     ->setAlpha($alpha);
     }
 
@@ -281,7 +281,7 @@ class Color implements ColorContract
      */
     public static function isValidHex($hex)
     {
-        return ColorValidator::isValidHex($hex);
+        return ColorValidator::validateHex($hex);
     }
 
     /* ------------------------------------------------------------------------------------------------
