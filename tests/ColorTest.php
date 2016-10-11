@@ -31,7 +31,7 @@ class ColorTest extends TestCase
         $this->assertSame(0, $color->red());
         $this->assertSame(0, $color->green());
         $this->assertSame(0, $color->blue());
-        $this->assertSame(1, $color->alpha());
+        $this->assertSame(1.0, $color->alpha());
         $this->assertTrue($color->isDark());
         $this->assertFalse($color->isBright());
     }
@@ -44,7 +44,7 @@ class ColorTest extends TestCase
         $this->assertSame(255, $color->red());
         $this->assertSame(255, $color->green());
         $this->assertSame(255, $color->blue());
-        $this->assertSame(1,   $color->alpha());
+        $this->assertSame(1.0, $color->alpha());
         $this->assertFalse($color->isDark());
         $this->assertTrue($color->isBright());
     }
@@ -55,10 +55,10 @@ class ColorTest extends TestCase
         foreach (['#000', '#000000'] as $hex) {
             $color = Color::make($hex);
 
-            $this->assertSame(0, $color->red());
-            $this->assertSame(0, $color->green());
-            $this->assertSame(0, $color->blue());
-            $this->assertSame(1, $color->alpha());
+            $this->assertSame(0,   $color->red());
+            $this->assertSame(0,   $color->green());
+            $this->assertSame(0,   $color->blue());
+            $this->assertSame(1.0, $color->alpha());
             $this->assertTrue($color->isDark());
             $this->assertFalse($color->isBright());
         }
@@ -69,7 +69,7 @@ class ColorTest extends TestCase
             $this->assertSame(255, $color->red());
             $this->assertSame(255, $color->green());
             $this->assertSame(255, $color->blue());
-            $this->assertSame(1,   $color->alpha());
+            $this->assertSame(1.0, $color->alpha());
             $this->assertFalse($color->isDark());
             $this->assertTrue($color->isBright());
         }
@@ -138,7 +138,7 @@ class ColorTest extends TestCase
      */
     public function it_must_throw_an_exception_on_invalid_alpha_one()
     {
-        (new Color())->setAlpha('1');
+        (new Color())->setAlpha('one');
     }
 
     /**

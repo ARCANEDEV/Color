@@ -39,9 +39,9 @@ class Color implements ColorContract
     /**
      * Alpha value.
      *
-     * @var float|int
+     * @var float
      */
-    protected $alpha = 1;
+    protected $alpha = 1.0;
 
     /* ------------------------------------------------------------------------------------------------
      |  Constructor
@@ -55,7 +55,7 @@ class Color implements ColorContract
      * @param  int        $blue
      * @param  float|int  $alpha
      */
-    public function __construct($red = 0, $green = 0, $blue = 0, $alpha = 1)
+    public function __construct($red = 0, $green = 0, $blue = 0, $alpha = 1.0)
     {
         $this->setRgba($red, $green, $blue, $alpha);
     }
@@ -174,7 +174,7 @@ class Color implements ColorContract
     /**
      * Get the alpha value.
      *
-     * @return float|int
+     * @return float
      */
     public function alpha()
     {
@@ -327,10 +327,12 @@ class Color implements ColorContract
      *
      * @throws \Arcanedev\Color\Exceptions\ColorException
      */
-    public function checkAlphaValue($alpha)
+    public function checkAlphaValue(&$alpha)
     {
-        if ( ! is_float($alpha) && ! is_int($alpha))
+        if ( ! is_numeric($alpha))
             throw new ColorException("The alpha value must be a float or an integer.");
+
+        $alpha = (float) $alpha;
 
         if ($alpha < 0 || $alpha > 1)
             throw new ColorException(
