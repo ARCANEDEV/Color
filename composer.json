@@ -1,8 +1,8 @@
 {
     "name":        "arcanedev/color",
-    "description": "PHP Helper for manipulating colors.",
+    "description": "PHP Helper for manipulating colors (Laravel 5.x supported).",
     "keywords": [
-        "arcanedev", "color", "hex", "rgb"
+        "arcanedev", "color", "hex", "rgb", "rgba", "hsl", "hsv", "converter", "validation", "laravel"
     ],
     "homepage": "https://github.com/ARCANEDEV/Color",
     "authors": [
