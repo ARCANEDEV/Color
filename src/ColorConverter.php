@@ -58,7 +58,7 @@ class ColorConverter implements ColorConverterContract
      * @param  float|int  $saturation
      * @param  float|int  $value
      *
-     * @return array
+     * @return string
      */
     public static function hsvToHex($hue, $saturation, $value)
     {
@@ -72,7 +72,7 @@ class ColorConverter implements ColorConverterContract
      * @param  float|int  $saturation
      * @param  float|int  $value
      *
-     * @return array
+     * @return string
      */
     public function fromHsvToHex($hue, $saturation, $value)
     {

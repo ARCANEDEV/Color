@@ -15,5 +15,8 @@ class Color extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'arcanedev.color'; }
+    protected static function getFacadeAccessor()
+    {
+        return \Arcanedev\Color\Contracts\Color::class;
+    }
 }

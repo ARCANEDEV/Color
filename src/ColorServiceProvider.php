@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\Color;
 
-use Illuminate\Support\ServiceProvider;
+use Arcanedev\Support\ServiceProvider;
 
 /**
  * Class     ColorServiceProvider
@@ -30,11 +30,10 @@ class ColorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('arcanedev.color', Color::class);
-        $this->app->bind(Contracts\Color::class, 'arcanedev.color');
-
-        $this->app->bind('arcanedev.color.converter', ColorConverter::class);
-        $this->app->bind(Contracts\ColorConverter::class, 'arcanedev.color.converter');
+        $this->bind(Contracts\Color::class, Color::class);
+        $this->bind('arcanedev.color', Contracts\Color::class);
+        $this->bind(Contracts\ColorConverter::class, ColorConverter::class);
+        $this->bind('arcanedev.color.converter', Contracts\ColorConverter::class);
     }
 
     /**
