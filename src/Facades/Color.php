@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Color\Facades;
 
+use Arcanedev\Color\Contracts\Color as ColorContract;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -15,8 +16,5 @@ class Color extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
-    {
-        return \Arcanedev\Color\Contracts\Color::class;
-    }
+    protected static function getFacadeAccessor() { return ColorContract::class; }
 }

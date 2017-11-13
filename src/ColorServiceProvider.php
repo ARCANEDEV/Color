@@ -10,10 +10,11 @@ use Arcanedev\Support\ServiceProvider;
  */
 class ColorServiceProvider extends ServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -21,19 +22,20 @@ class ColorServiceProvider extends ServiceProvider
      */
     protected $defer = true;
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Register any application services.
      */
     public function register()
     {
+        parent::register();
+
         $this->bind(Contracts\Color::class, Color::class);
-        $this->bind('arcanedev.color', Contracts\Color::class);
         $this->bind(Contracts\ColorConverter::class, ColorConverter::class);
-        $this->bind('arcanedev.color.converter', Contracts\ColorConverter::class);
     }
 
     /**
@@ -41,6 +43,8 @@ class ColorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        parent::boot();
+
         $this->extendValidator();
     }
 
@@ -52,17 +56,16 @@ class ColorServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'arcanedev.color',
-            'arcanedev.color.converter',
             Contracts\Color::class,
             Contracts\ColorConverter::class,
         ];
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Extend validator.
      */
