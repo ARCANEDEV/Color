@@ -8,10 +8,11 @@
  */
 trait HSVTrait
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Convert an RGB color to an HSV array (alias).
      *
@@ -97,10 +98,11 @@ trait HSVTrait
         }, $this->calculateRgbWithHueAndChroma($hue, $chroma));
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
+
     /**
      * Recalculate the Hue.
      *
@@ -142,7 +144,9 @@ trait HSVTrait
         $colors = $this->getColorsRange($chroma, $xPrime);
         $index  = (int) floor($hPrime);
 
-        return array_key_exists($index, $colors) ? $colors[$index] : [0.0, 0.0, 0.0];
+        return array_key_exists($index, $colors)
+            ? $colors[$index]
+            : [0.0, 0.0, 0.0];
     }
 
     /**
@@ -155,7 +159,8 @@ trait HSVTrait
      */
     protected function calculateXPrime($hPrime, $chroma)
     {
-        while ($hPrime >= 2.0) $hPrime -= 2.0;
+        while ($hPrime >= 2.0)
+            $hPrime -= 2.0;
 
         return $chroma * (1 - abs($hPrime - 1));
     }
@@ -171,8 +176,11 @@ trait HSVTrait
      */
     protected function sanitizeHsvValue($value, $min, $max)
     {
-        if ($value < $min) return $min;
-        if ($value > $max) return $max;
+        if ($value < $min)
+            return $min;
+
+        if ($value > $max)
+            return $max;
 
         return $value;
     }
