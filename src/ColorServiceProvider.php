@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\Color;
 
-use Arcanedev\Support\ServiceProvider;
+use Arcanedev\Support\PackageServiceProvider;
 
 /**
  * Class     ColorServiceProvider
@@ -8,12 +8,19 @@ use Arcanedev\Support\ServiceProvider;
  * @package  Arcanedev\Color
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class ColorServiceProvider extends ServiceProvider
+class ColorServiceProvider extends PackageServiceProvider
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
+    /**
+     * Package name.
+     *
+     * @var string
+     */
+    protected $package = 'color';
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -45,7 +52,7 @@ class ColorServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        $this->extendValidator();
+        $this->loadTranslations();
     }
 
     /**
@@ -59,22 +66,5 @@ class ColorServiceProvider extends ServiceProvider
             Contracts\Color::class,
             Contracts\ColorConverter::class,
         ];
-    }
-
-    /* -----------------------------------------------------------------
-     |  Other Methods
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * Extend validator.
-     */
-    private function extendValidator()
-    {
-        /** @var \Illuminate\Validation\Factory $validator */
-        $validator = $this->app->make('validator');
-
-        $validator->extend('color',   'Arcanedev\\Color\\Laravel\\ColorValidator@validate');
-        $validator->replacer('color', 'Arcanedev\\Color\\Laravel\\ColorValidator@message');
     }
 }
