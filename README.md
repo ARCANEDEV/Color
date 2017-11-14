@@ -19,16 +19,17 @@ Feel free to check out the [releases](https://github.com/ARCANEDEV/Color/release
 ### Features
 
   * Framework agnostic package.
+  * Easy setup &amp; configuration.
+  * Multiple color **Converters** and **Validators**: `HEX`, `RGB`, `RGBA`, `HSL`.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `5.0`, `5.1`, `5.2`, `5.3`, `5.4` are supported.
+  * Laravel `5.0 | 5.1 | 5.2 | 5.3 | 5.4 | 5.5` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents
 
   1. [Installation and Setup](_docs/1-Installation-and-Setup.md)
-  2. [Configuration](_docs/2-Configuration.md)
-  3. [Usage](_docs/3-Usage.md)
+  2. [Usage](_docs/2-Usage.md)
 
 ## Contribution
 
