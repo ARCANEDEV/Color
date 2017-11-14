@@ -26,7 +26,7 @@ trait HSVTrait
      */
     public static function rgbToHsv($red, $green, $blue)
     {
-        return (new self())->fromRgbToHsv($red, $green, $blue);
+        return (new self)->fromRgbToHsv($red, $green, $blue);
     }
 
     /**
@@ -176,11 +176,9 @@ trait HSVTrait
      */
     protected function sanitizeHsvValue($value, $min, $max)
     {
-        if ($value < $min)
-            return $min;
+        if ($value < $min) return $min;
 
-        if ($value > $max)
-            return $max;
+        if ($value > $max) return $max;
 
         return $value;
     }

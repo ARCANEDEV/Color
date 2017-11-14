@@ -6,7 +6,7 @@
  * @package  Arcanedev\Color\Tests
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     //
 }
