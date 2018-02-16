@@ -30,6 +30,13 @@ class ColorServiceProviderTest extends LaravelTestCase
         $this->provider = $this->app->getProvider(ColorServiceProvider::class);
     }
 
+    protected function tearDown()
+    {
+        unset($this->provider);
+
+        parent::tearDown();
+    }
+
     /* -----------------------------------------------------------------
      |  Tests
      | -----------------------------------------------------------------
@@ -44,7 +51,7 @@ class ColorServiceProviderTest extends LaravelTestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->provider);
+            static::assertInstanceOf($expected, $this->provider);
         }
     }
 
@@ -56,13 +63,13 @@ class ColorServiceProviderTest extends LaravelTestCase
             \Arcanedev\Color\Contracts\ColorConverter::class,
         ];
 
-        $this->assertSame($expected, $this->provider->provides());
+        static::assertSame($expected, $this->provider->provides());
     }
 
     /** @test */
     public function it_can_make_color_instance_with_contract()
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Color\Color::class,
             $this->app->make(\Arcanedev\Color\Contracts\Color::class)
         );
@@ -71,7 +78,7 @@ class ColorServiceProviderTest extends LaravelTestCase
     /** @test */
     public function it_can_make_color_converter_instance_with_contract()
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Color\ColorConverter::class,
             $this->app->make(\Arcanedev\Color\Contracts\ColorConverter::class)
         );

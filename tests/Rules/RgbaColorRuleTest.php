@@ -23,8 +23,8 @@ class RgbaColorRuleTest extends AbstractColorRuleTest
         foreach ($this->getValidColors() as $color) {
             $v = $validator->make(compact('color'), ['color' => ['required', new RgbaColorRule]]);
 
-            $this->assertTrue($v->passes(), "Failed on {$color}");
-            $this->assertFalse($v->fails(), "Failed on {$color}");
+            static::assertTrue($v->passes(), "Failed on {$color}");
+            static::assertFalse($v->fails(), "Failed on {$color}");
         }
     }
 
@@ -36,9 +36,9 @@ class RgbaColorRuleTest extends AbstractColorRuleTest
         foreach ($this->getInvalidColors() as $color) {
             $v = $validator->make(['color_picker' => $color], ['color_picker' => ['required', new RgbaColorRule]]);
 
-            $this->assertFalse($v->passes(), "Failed on {$color}");
-            $this->assertTrue($v->fails(), "Failed on {$color}");
-            $this->assertSame(
+            static::assertFalse($v->passes(), "Failed on {$color}");
+            static::assertTrue($v->fails(), "Failed on {$color}");
+            static::assertSame(
                 'The color picker field has invalid RGBA color.',
                 $v->messages()->first('color_picker'),
                 "Failed on {$color}"
@@ -55,9 +55,9 @@ class RgbaColorRuleTest extends AbstractColorRuleTest
         foreach ($this->getInvalidColors() as $color) {
             $v = $validator->make(['color_picker' => $color], ['color_picker' => ['required', new RgbaColorRule]]);
 
-            $this->assertFalse($v->passes(), "Failed on {$color}");
-            $this->assertTrue($v->fails(), "Failed on {$color}");
-            $this->assertSame(
+            static::assertFalse($v->passes(), "Failed on {$color}");
+            static::assertTrue($v->fails(), "Failed on {$color}");
+            static::assertSame(
                 'Le champ color picker a une couleur RGBA invalide.',
                 $v->messages()->first('color_picker'),
                 "Failed on {$color}"

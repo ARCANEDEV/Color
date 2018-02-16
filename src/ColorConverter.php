@@ -34,7 +34,7 @@ class ColorConverter implements ColorConverterContract
      */
     public static function hexToHsv($hex)
     {
-        return (new self)->fromHexToHsv($hex);
+        return (new static)->fromHexToHsv($hex);
     }
 
     /**
@@ -64,7 +64,7 @@ class ColorConverter implements ColorConverterContract
      */
     public static function hsvToHex($hue, $saturation, $value)
     {
-        return (new self)->fromHsvToHex($hue, $saturation, $value);
+        return (new static)->fromHsvToHex($hue, $saturation, $value);
     }
 
     /**
