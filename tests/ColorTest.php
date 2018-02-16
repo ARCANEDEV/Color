@@ -11,7 +11,7 @@ use Arcanedev\Color\Color;
 class ColorTest extends TestCase
 {
     /* -----------------------------------------------------------------
-     |  Test Methods
+     |  Tests
      | -----------------------------------------------------------------
      */
 
@@ -26,15 +26,15 @@ class ColorTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $color);
+            static::assertInstanceOf($expected, $color);
         }
 
-        $this->assertSame(0, $color->red());
-        $this->assertSame(0, $color->green());
-        $this->assertSame(0, $color->blue());
-        $this->assertSame(1.0, $color->alpha());
-        $this->assertTrue($color->isDark());
-        $this->assertFalse($color->isBright());
+        static::assertSame(0, $color->red());
+        static::assertSame(0, $color->green());
+        static::assertSame(0, $color->blue());
+        static::assertSame(1.0, $color->alpha());
+        static::assertTrue($color->isDark());
+        static::assertFalse($color->isBright());
     }
 
     /** @test */
@@ -42,12 +42,12 @@ class ColorTest extends TestCase
     {
         $color = new Color(255, 255, 255);
 
-        $this->assertSame(255, $color->red());
-        $this->assertSame(255, $color->green());
-        $this->assertSame(255, $color->blue());
-        $this->assertSame(1.0, $color->alpha());
-        $this->assertFalse($color->isDark());
-        $this->assertTrue($color->isBright());
+        static::assertSame(255, $color->red());
+        static::assertSame(255, $color->green());
+        static::assertSame(255, $color->blue());
+        static::assertSame(1.0, $color->alpha());
+        static::assertFalse($color->isDark());
+        static::assertTrue($color->isBright());
     }
 
     /** @test */
@@ -56,23 +56,23 @@ class ColorTest extends TestCase
         foreach (['#000', '#000000'] as $hex) {
             $color = Color::make($hex);
 
-            $this->assertSame(0,   $color->red());
-            $this->assertSame(0,   $color->green());
-            $this->assertSame(0,   $color->blue());
-            $this->assertSame(1.0, $color->alpha());
-            $this->assertTrue($color->isDark());
-            $this->assertFalse($color->isBright());
+            static::assertSame(0,   $color->red());
+            static::assertSame(0,   $color->green());
+            static::assertSame(0,   $color->blue());
+            static::assertSame(1.0, $color->alpha());
+            static::assertTrue($color->isDark());
+            static::assertFalse($color->isBright());
         }
 
         foreach (['#FFF', '#FFFFFF'] as $hex) {
             $color = Color::make($hex);
 
-            $this->assertSame(255, $color->red());
-            $this->assertSame(255, $color->green());
-            $this->assertSame(255, $color->blue());
-            $this->assertSame(1.0, $color->alpha());
-            $this->assertFalse($color->isDark());
-            $this->assertTrue($color->isBright());
+            static::assertSame(255, $color->red());
+            static::assertSame(255, $color->green());
+            static::assertSame(255, $color->blue());
+            static::assertSame(1.0, $color->alpha());
+            static::assertFalse($color->isDark());
+            static::assertTrue($color->isBright());
         }
     }
 
@@ -81,21 +81,21 @@ class ColorTest extends TestCase
     {
         $color = new Color(0, 0, 0);
 
-        $this->assertSame('#000000', $color->toHex());
-        $this->assertSame('#000000', $color->toHex(false));
-        $this->assertSame('#000000', (string) $color);
+        static::assertSame('#000000', $color->toHex());
+        static::assertSame('#000000', $color->toHex(false));
+        static::assertSame('#000000', (string) $color);
 
         $color = new Color(255, 255, 255);
 
-        $this->assertSame('#FFFFFF', $color->toHex());
-        $this->assertSame('#ffffff', $color->toHex(false));
-        $this->assertSame('#FFFFFF', (string) $color);
+        static::assertSame('#FFFFFF', $color->toHex());
+        static::assertSame('#ffffff', $color->toHex(false));
+        static::assertSame('#FFFFFF', (string) $color);
 
         $color = new Color(186, 218, 85);
 
-        $this->assertSame('#BADA55', $color->toHex());
-        $this->assertSame('#bada55', $color->toHex(false));
-        $this->assertSame('#BADA55', (string) $color);
+        static::assertSame('#BADA55', $color->toHex());
+        static::assertSame('#bada55', $color->toHex(false));
+        static::assertSame('#BADA55', (string) $color);
     }
 
     /**
@@ -139,7 +139,7 @@ class ColorTest extends TestCase
      */
     public function it_must_throw_an_exception_on_invalid_alpha_one()
     {
-        (new Color())->setAlpha('one');
+        (new Color)->setAlpha('one');
     }
 
     /**
@@ -150,6 +150,6 @@ class ColorTest extends TestCase
      */
     public function it_must_throw_an_exception_on_invalid_alpha_two()
     {
-        (new Color())->setAlpha(100);
+        (new Color)->setAlpha(100);
     }
 }

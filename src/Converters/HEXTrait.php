@@ -24,7 +24,7 @@ trait HEXTrait
      */
     public static function hexToRgb($hex)
     {
-        return (new self)->fromHexToRgb($hex);
+        return (new static)->fromHexToRgb($hex);
     }
 
     /**
@@ -62,7 +62,7 @@ trait HEXTrait
      */
     public static function rgbToHex($red, $green, $blue)
     {
-        return (new self)->fromRgbToHex($red, $green, $blue);
+        return (new static)->fromRgbToHex($red, $green, $blue);
     }
 
     /**

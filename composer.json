@@ -33,5 +33,17 @@
         "psr-4": {
             "Arcanedev\\Color\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "platform": {
+            "php": "7.0.0"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Arcanedev\\Color\\ColorServiceProvider"
+            ]
+        }
     }
 }

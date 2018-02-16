@@ -25,7 +25,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertTrue(ColorValidator::validateHex($color), $color);
+            static::assertTrue(ColorValidator::validateHex($color), $color);
         }
 
         $colors = [
@@ -34,7 +34,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertFalse(ColorValidator::validateHex($color), $color);
+            static::assertFalse(ColorValidator::validateHex($color), $color);
         }
     }
 
@@ -49,7 +49,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertTrue(ColorValidator::validateRgb($color), $color);
+            static::assertTrue(ColorValidator::validateRgb($color), $color);
         }
 
         $colors = [
@@ -62,7 +62,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertFalse(ColorValidator::validateRgb($color), $color);
+            static::assertFalse(ColorValidator::validateRgb($color), $color);
         }
     }
 
@@ -77,7 +77,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertTrue(ColorValidator::validateRgba($color), $color);
+            static::assertTrue(ColorValidator::validateRgba($color), $color);
         }
 
         $colors = [
@@ -90,7 +90,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertFalse(ColorValidator::validateRgba($color), $color);
+            static::assertFalse(ColorValidator::validateRgba($color), $color);
         }
     }
 
@@ -104,7 +104,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertTrue(ColorValidator::validateHsl($color), $color);
+            static::assertTrue(ColorValidator::validateHsl($color), $color);
         }
 
         $colors = [
@@ -113,7 +113,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertFalse(ColorValidator::validateHsl($color), $color);
+            static::assertFalse(ColorValidator::validateHsl($color), $color);
         }
     }
 
@@ -130,7 +130,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertTrue(ColorValidator::validateHsla($color), $color);
+            static::assertTrue(ColorValidator::validateHsla($color), $color);
         }
 
         $colors = [
@@ -139,7 +139,7 @@ class ColorValidatorTest extends TestCase
         ];
 
         foreach ($colors as $color) {
-            $this->assertFalse(ColorValidator::validateHsla($color), $color);
+            static::assertFalse(ColorValidator::validateHsla($color), $color);
         }
     }
 }
